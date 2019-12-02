@@ -25,7 +25,19 @@
               <input type="button" class="btn btn-info col-sm-12" value="Szukaj"/>
           </div>
         </form>
-      <h1>Filmy wg gatunku</h1>
+      <div>
+        <h1>Filmy wg gatunku</h1>
+        <div> 
+            <div *ngFor ="let gerner of geners">
+              <b>{{gerner}}</b>
+            <div *ngFor="let tit of grouppedMoviesByGenersArray[gerner]; let i = index" >
+            {{tit.title}} 
+      
+          </div>
+          </div>
+        </div>
+      </div>
+
       <h1>Filmy wg obsady</h1>
 
 
@@ -42,6 +54,8 @@
         <app-movie-table *ngFor="let movie of moviesToDisplay" [film]="movie"></app-movie-table>
       </tbody>
     </table>
+
+ 
     
 <button href="#"
 *ngIf="diffrenceBetweenMoviesAndMoviesToDisplayLength !=0" class="btn btn-info col-sm-12" (click)="onAddPositions()"> Pokaz wiecej</button>

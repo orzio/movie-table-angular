@@ -10,7 +10,6 @@ import * as _ from 'underscore';
 export class AppComponent {
   
   constructor(){}
-
   ngOnInit(){
     for(let i=0; i<this.counter; i++)
         this.moviesToDisplay.push(this.movies[i]);
@@ -18,7 +17,8 @@ export class AppComponent {
   this.fillMoviesArrays();
   this.fillMoviesByGenersArray();
   this.groupArray(this.genersGroup, 'gener');
-  console.log(this.grouppedMoviesByGenersArray);
+  this.getProperties(this.grouppedMoviesByGenersArray,this.geners);
+  // this.getProperies(this.)
 }
   title = 'zadanie-trzecie';
   diffrenceBetweenMoviesAndMoviesToDisplayLength:number;
@@ -26,14 +26,11 @@ export class AppComponent {
   moviesToDisplay:{title:string, year:number, cast:[],genres:[]}[] = [];
   moviesBygeners:{title:string, year:number, cast:[],genres:[]}[] = [];
   moviesByCast:{title:string, year:number, cast:[],genres:[]}[] = [];
-  genersGroup:any = [];
+  genersGroup:any=[];
+  geners:string[] = [];
+  cast:string [] = [];
   counter:number =10;
   grouppedMoviesByGenersArray:any =[];
-
-
-
-
-
 
   /**Functions */
 
@@ -52,7 +49,7 @@ export class AppComponent {
   }
 
   fillMoviesArrays(){
-    let counter =0;
+    let counter =0; 
     for(let movie of this.movies){
       if(counter<=100){
         this.moviesBygeners.push(movie);
@@ -79,8 +76,21 @@ export class AppComponent {
     }
   }
 
+  //metoda grupujaca filmy
   groupArray(list, selector){
     this.grouppedMoviesByGenersArray = _.groupBy(list, selector);
+    console.log(this.grouppedMoviesByGenersArray);
+  }
+
+//metoda wyciagajaca propoeriesty z grup.
+  getProperties(groupObject, list){
+    for (var prop in groupObject) {
+      if (Object.prototype.hasOwnProperty.call(groupObject, prop)) {
+        console.log(prop);
+        list.push(prop);
+          // do stuff
+      }
+  }
   }
 
 
