@@ -1,4 +1,4 @@
- <div class="container">
+<div class="container">
     <h1>Baza filmów</h1>
       <form>
           <div class="form-group">
@@ -25,39 +25,50 @@
               <input type="button" class="btn btn-info col-sm-12" value="Szukaj"/>
           </div>
         </form>
+
+        <h1>Filmy</h1>
+        <table class="table-condensed table-hover">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Production Year</th>
+                <th>Cast</th>
+                <th>Genres</th>
+              </tr>
+            </thead>
+        <tbody>
+          <app-movie-table *ngFor="let movie of moviesToDisplay" [film]="movie"></app-movie-table>
+        </tbody>
+      </table>          
+<button href="#"
+*ngIf="diffrenceBetweenMoviesAndMoviesToDisplayLength !=0" class="btn btn-info col-sm-12" (click)="onAddPositions()"> Pokaz wiecej</button>
+  
+
+
+
       <div>
         <h1>Filmy wg gatunku</h1>
         <div> 
-            <div *ngFor ="let gerner of geners">
+            <ul *ngFor ="let gerner of geners">
               <b>{{gerner}}</b>
-            <div *ngFor="let tit of grouppedMoviesByGenersArray[gerner]; let i = index" >
-            {{tit.title}} 
-      
-          </div>
-          </div>
+              <app-genres-list *ngFor="let movie of grouppedMoviesByGenersArray[gerner]" [film]="movie.title"></app-genres-list>
+            </ul>
         </div>
       </div>
 
-      <h1>Filmy wg obsady</h1>
+
+      <div>      
+        <h1>Filmy wg obsady</h1>
+        <div> 
+            <ul *ngFor ="let actor of cast">
+                        <b>{{actor}}</b>
+             <app-cast-list *ngFor="let movie of groouppedMoviesByCastArray[actor]" [film] = "movie.title" >{{movie.title}}</app-cast-list>
+           </ul>
+        </div>
+      </div>
 
 
-      <table class="table-condensed table-hover">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Production Year</th>
-              <th>Cast</th>
-              <th>Genres</th>
-            </tr>
-          </thead>
-      <tbody>
-        <app-movie-table *ngFor="let movie of moviesToDisplay" [film]="movie"></app-movie-table>
-      </tbody>
-    </table>
-
+     
  
-    
-<button href="#"
-*ngIf="diffrenceBetweenMoviesAndMoviesToDisplayLength !=0" class="btn btn-info col-sm-12" (click)="onAddPositions()"> Pokaz wiecej</button>
-</div>
 
+</div>

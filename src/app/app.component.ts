@@ -16,9 +16,11 @@ export class AppComponent {
 
   this.fillMoviesArrays();
   this.fillMoviesByGenersArray();
-  this.groupArray(this.genersGroup, 'gener');
+  this.fillMoviesByCastArray();
+  this.groupMovieByGener(this.genersGroup);
   this.getProperties(this.grouppedMoviesByGenersArray,this.geners);
-  // this.getProperies(this.)
+  this.groupMovieByCast(this.castGroup);
+  this.getProperties(this.groouppedMoviesByCastArray, this.cast);
 }
   title = 'zadanie-trzecie';
   diffrenceBetweenMoviesAndMoviesToDisplayLength:number;
@@ -27,10 +29,12 @@ export class AppComponent {
   moviesBygeners:{title:string, year:number, cast:[],genres:[]}[] = [];
   moviesByCast:{title:string, year:number, cast:[],genres:[]}[] = [];
   genersGroup:any=[];
+  castGroup:any=[];
   geners:string[] = [];
   cast:string [] = [];
   counter:number =10;
   grouppedMoviesByGenersArray:any =[];
+  groouppedMoviesByCastArray:any = [];
 
   /**Functions */
 
@@ -48,6 +52,7 @@ export class AppComponent {
     }
   }
 
+  //wypelniam tablice gatunkow i obsady pozycjami
   fillMoviesArrays(){
     let counter =0; 
     for(let movie of this.movies){
@@ -60,6 +65,24 @@ export class AppComponent {
   }
 
 
+  fillMoviesByCastArray(){
+    for(let movie of this.moviesByCast){
+      if(movie.cast.length ==0){
+        this.castGroup.push({
+          title:movie.title, cast:"Unknown"
+        });
+        continue;
+      }else{
+        for(let count =0; count<movie.cast.length; count++){
+          this.castGroup.push({title:movie.title,
+                                cast:movie.cast[count]});
+        }
+      }
+    }
+  }
+
+
+//wypelniam 
   fillMoviesByGenersArray(){
     for(let movie of this.moviesBygeners){
       if(movie.genres.length ==0){
@@ -77,10 +100,14 @@ export class AppComponent {
   }
 
   //metoda grupujaca filmy
-  groupArray(list, selector){
-    this.grouppedMoviesByGenersArray = _.groupBy(list, selector);
-    console.log(this.grouppedMoviesByGenersArray);
+  groupMovieByGener(list){
+    this.grouppedMoviesByGenersArray = _.groupBy(list, 'gener');
   }
+
+  groupMovieByCast(list){
+    this.groouppedMoviesByCastArray = _.groupBy(list, 'cast');
+  }
+
 
 //metoda wyciagajaca propoeriesty z grup.
   getProperties(groupObject, list){
@@ -88,9 +115,8 @@ export class AppComponent {
       if (Object.prototype.hasOwnProperty.call(groupObject, prop)) {
         console.log(prop);
         list.push(prop);
-          // do stuff
       }
-  }
+    }
   }
 
 
