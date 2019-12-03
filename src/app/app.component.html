@@ -11,7 +11,13 @@
               </tr>
             </thead>
         <tbody>
-          <app-movie-table *ngFor="let movie of moviesToDisplay" [film]="movie"></app-movie-table>
+          <!-- <div>
+              <app-movie-table *ngFor="let movie of moviesToDisplay" [film]="movie"></app-movie-table>
+          </div> -->
+<!-- <h1>filterki</h1> -->
+          <div>
+              <app-movie-table *ngFor="let movie of filteredMovies" [film]="movie"></app-movie-table>
+          </div>
         </tbody>
       </table>          
 <button href="#"

@@ -13,6 +13,7 @@ export class AppComponent {
   ngOnInit(){
     for(let i=0; i<this.counter; i++)
         this.moviesToDisplay.push(this.movies[i]);
+        this.filteredMovies = this.moviesToDisplay;
 
   this.fillMoviesArrays();
   this.fillMoviesByGenersArray();
@@ -26,6 +27,7 @@ export class AppComponent {
   diffrenceBetweenMoviesAndMoviesToDisplayLength:number;
   movies:any= (data as any).default;
   moviesToDisplay:{title:string, year:number, cast:[],genres:[]}[] = [];
+  filteredMovies:{title:string, year:number, cast:[],genres:[]}[] = [];
   moviesBygeners:{title:string, year:number, cast:[],genres:[]}[] = [];
   moviesByCast:{title:string, year:number, cast:[],genres:[]}[] = [];
   genersGroup:any=[];
@@ -123,13 +125,42 @@ export class AppComponent {
 
   onFilter(filterArray){
     console.log(filterArray);
- this.filterSelectorsArray = filterArray;
-console.log(this.filterSelectorsArray)
+    this.filteredMovies = this.moviesToDisplay;
+    console.log(filterArray);
+    if(filterArray[0] !=undefined){
+      console.log('w ifie');
+      this.filteredMovies = _.filter(this.filteredMovies, (movie)=>{
+        return movie['title'].toUpperCase().includes(filterArray[0].toUpperCase());
+      })
+    }
+
+    if(filterArray[1] !=undefined){
+
   }
 
+    if(filterArray[2] !=undefined){
+      console.log("w starting point");
+      this.filteredMovies = _.filter(this.filteredMovies, (movie)=>{
+        console.log(movie['year']);
+        console.log(Number(filterArray[2]));
+        console.log(this.filteredMovies);
+        console.log(movie['year'] >= Number(filterArray[2]));
+        return (movie['year'] >= Number(filterArray[2]));
+      })
+  }
+
+  if(filterArray[3] !=undefined){
+    console.log('w ending')
+    this.filteredMovies = _.filter(this.filteredMovies, (movie)=>{
+      return movie['year']<= filterArray[3];
+    })
+}
+  console.log(this.filteredMovies);
 
 
 
-
+  
+}
 
 }
+
