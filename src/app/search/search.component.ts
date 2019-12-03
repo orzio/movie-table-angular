@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -7,6 +7,7 @@ import { Component, OnInit} from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
+ @Output() onSubmitButtonClicked = new EventEmitter<string[]>();
   constructor() { }
 
   ngOnInit() {
@@ -14,10 +15,11 @@ export class SearchComponent implements OnInit {
 
   title:string;
   actor:string;
-  startingProductionYear:number;
-  endingProductionYear:number;
+  startingProductionYear:string;
+  endingProductionYear:string;
 
   onSubmit(){
+    this.onSubmitButtonClicked.emit([this.title, this.actor, this.startingProductionYear, this.endingProductionYear]);
     console.log("btn_dwn");
     this.title='';
     this.actor='';

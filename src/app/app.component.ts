@@ -35,6 +35,7 @@ export class AppComponent {
   counter:number =10;
   grouppedMoviesByGenersArray:any =[];
   groouppedMoviesByCastArray:any = [];
+  @Input() filterSelectorsArray:string[] = [];
 
   /**Functions */
 
@@ -117,6 +118,13 @@ export class AppComponent {
         list.push(prop);
       }
     }
+  }
+
+
+  onFilter(filterArray){
+    console.log(filterArray);
+ this.filterSelectorsArray = filterArray;
+console.log(this.filterSelectorsArray)
   }
 
 
