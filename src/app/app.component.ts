@@ -57,15 +57,16 @@ export class AppComponent {
 
   //wypelniam tablice gatunkow i obsady pozycjami
   fillMoviesArrays(){
-    let counter =0; 
-    for(let movie of this.movies){
-      if(counter<=100){
-        this.moviesBygeners.push(movie);
-        this.moviesByCast.push(movie);
-        counter++;
-      }else break;
-    }
+    for(let[i,v] of this.movies.entries()){
+      if(i>=400 && i<=500){
+        console.log(i);
+        this.moviesBygeners.push(v);
+        this.moviesByCast.push(v);
+    } else if(i>500)
+      break;
   }
+}
+  
 
 
   fillMoviesByCastArray(){
@@ -89,7 +90,6 @@ export class AppComponent {
   fillMoviesByGenersArray(){
     for(let movie of this.moviesBygeners){
       if(movie.genres.length ==0){
-        console.log("w ifie");
         this.genersGroup.push({title:movie.title,
           gener:"Unknown"});
           continue;
@@ -116,7 +116,6 @@ export class AppComponent {
   getProperties(groupObject, list){
     for (var prop in groupObject) {
       if (Object.prototype.hasOwnProperty.call(groupObject, prop)) {
-        console.log(prop);
         list.push(prop);
       }
     }
@@ -124,42 +123,55 @@ export class AppComponent {
 
 
   onFilter(filterArray){
-    console.log(filterArray);
-    this.filteredMovies = this.moviesToDisplay;
-    console.log(filterArray);
     if(filterArray[0] !=undefined){
-      console.log('w ifie');
       this.filteredMovies = _.filter(this.filteredMovies, (movie)=>{
         return movie['title'].toUpperCase().includes(filterArray[0].toUpperCase());
       })
     }
 
-    if(filterArray[1] !=undefined){
-
+if(filterArray[1] !=undefined){
+  this.filteredMovies = _.filter(this.filteredMovies, (movie)=>{
+  if(movie.cast != undefined){
+    for(let i =0; i<movie.cast.length; i++){
+    console.log(movie.cast[i]);
+    return movie.cast[i].toUpperCase().includes(filterArray[1].toUpperCase());
   }
+}
+
+  })
+}
+
+
+
 
     if(filterArray[2] !=undefined){
       console.log("w starting point");
       this.filteredMovies = _.filter(this.filteredMovies, (movie)=>{
-        console.log(movie['year']);
-        console.log(Number(filterArray[2]));
-        console.log(this.filteredMovies);
-        console.log(movie['year'] >= Number(filterArray[2]));
         return (movie['year'] >= Number(filterArray[2]));
       })
   }
 
   if(filterArray[3] !=undefined){
-    console.log('w ending')
+    console.log('w ending');
     this.filteredMovies = _.filter(this.filteredMovies, (movie)=>{
       return movie['year']<= filterArray[3];
     })
 }
-  console.log(this.filteredMovies);
+
+let counter =0;
+for(let i =0; i<4; i++){
+  if(filterArray[i] == undefined){
+    counter++;
+    console.log(filterArray[i]);
+  }
+}
+if(counter ==4){
+  console.log("counter ==4");
+  this.filteredMovies = this.moviesToDisplay;
+}
 
 
 
-  
 }
 
 }
