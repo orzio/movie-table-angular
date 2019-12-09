@@ -26,10 +26,10 @@ export class AppComponent {
   title = 'zadanie-trzecie';
   diffrenceBetweenMoviesAndMoviesToDisplayLength:number;
   movies:any= (data as any).default;
-  moviesToDisplay:{title:string, year:number, cast:[],genres:[]}[] = [];
-  filteredMovies:{title:string, year:number, cast:[],genres:[]}[] = [];
-  moviesBygeners:{title:string, year:number, cast:[],genres:[]}[] = [];
-  moviesByCast:{title:string, year:number, cast:[],genres:[]}[] = [];
+  moviesToDisplay:{title:string, year:number, cast:string[],genres:[]}[] = [];
+  filteredMovies:{title:string, year:number, cast:string[],genres:[]}[] = [];
+  moviesBygeners:{title:string, year:number, cast:string[],genres:[]}[] = [];
+  moviesByCast:{title:string, year:number, cast:string[],genres:[]}[] = [];
   genersGroup:any=[];
   castGroup:any=[];
   geners:string[] = [];
