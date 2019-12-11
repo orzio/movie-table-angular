@@ -1,8 +1,19 @@
-
-         <tr>
-            <td> {{film.title}}</td>
-            <td> {{film.year}}</td>
-            <td style="color:red"> {{film.cast}}</td>
-            <td> {{film.genres}}</td>
+<table class="table-condensed table-hover">
+<thead>
+    <tr>
+      <th>Title</th>
+      <th>Production Year</th>
+      <th>Cast</th>
+      <th>Genres</th>
+    </tr> 
+  </thead>
+         <tr *ngFor="let movie of film" style="width:100%">
+            <td> {{movie.title}}</td>
+            <td> {{movie.year}}</td>
+            <td>{{movie.cast}}</td>
+            <td> {{movie.genres}}</td>
           </tr>
           <br>
+  
+
+</table>

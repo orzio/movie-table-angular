@@ -1,25 +1,10 @@
 <div class="container">
   <app-search (onSubmitButtonClicked)="onFilter($event)"></app-search>
     <h1>Baza filmów</h1>
-        <table class="table-condensed table-hover">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Production Year</th>
-                <th>Cast</th>
-                <th>Genres</th>
-              </tr>
-            </thead>
-        <tbody>
-          <!-- <div>
-              <app-movie-table *ngFor="let movie of moviesToDisplay" [film]="movie"></app-movie-table>
-          </div> -->
-<!-- <h1>filterki</h1> -->
-          <div>
-              <app-movie-table *ngFor="let movie of filteredMovies" [film]="movie"></app-movie-table>
-          </div>
-        </tbody>
-      </table>          
+
+              <app-movie-table [film]="filteredMovies"></app-movie-table>
+ 
+
 <button href="#"
 *ngIf="diffrenceBetweenMoviesAndMoviesToDisplayLength !=0" class="btn btn-info col-sm-12" (click)="onAddPositions()"> Pokaz wiecej</button>
   
